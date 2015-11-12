@@ -98,8 +98,6 @@ export CZ=/home/trainee/sv/converter
 In order to generate ‘putative’ somatic SVs it is crucial to account for germline SVs. To facilitate, DELLY requires the joint input of a match normal control and the cancer aligned sequencing data (bam files).
 \end{information}
 
-\begin{steps}
-
 \begin{lstlisting}
 delly -t DEL -x \$RF/hg19.excl -o del.vcf -g \$RF/hg19.fa \$DS/cancer_cell_line.bam \$DS/control.bam
 delly -t DUP -x \$RF/hg19.excl -o dup.vcf -g \$RF/hg19.fa \$DS/cancer_cell_line.bam \$DS/control.bam
@@ -129,7 +127,7 @@ This command will output x files that constitute the
 \section{DELLY VCF output}
 
 \begin{information}
-A VCF file has multiple header lines starting with the hash # sign. Below the header lines is one record for each structural variant. The record format is described in the below table:
+A VCF file has multiple header lines starting with the hash \# sign. Below the header lines is one record for each structural variant. The record format is described in the below table:
 
 1	CHROM	Chromosome name
 2 	POS 		1-based position. For an indel, this is the position preceding the indel.
@@ -145,20 +143,20 @@ A VCF file has multiple header lines starting with the hash # sign. Below the he
 \begin{table}[H]
   \centering
   \caption{VCF output description}
-    \begin{tabular}{ll}
+    \begin{tabular}{lll}
     \toprule
     Column & Field & Description \\
     \midrule
-    1 & CHROM & Chromosome name\\
+    1 & CHROM & Chromosome name \\
     2 & POS & 1-based position. For an indel, this is the position preceding the indel \\
-    3 & ID & Variant identifier\\
-    4 & REF & Reference sequence at POS involved in the variant\\
-    5 & ALT & Comma delimited list of alternative sequence(s)\\
-    6 & QUAL & Phred-scaled probability of all samples being homozygous reference\\
-    7 & FILTER & Semicolon delimited list of filters that the variant fails to pass\\
-    8 & INFO & Semicolon delimited list of variant information\\
-    9 & FORMAT & Colon delimited list of the format of sample genotypes in subsequent fields\\
-    10+ & &Individual genotype information defined by FORMAT \\
+    3 & ID & Variant identifier \\
+    4 & REF & Reference sequence at POS involved in the variant \\
+    5 & ALT & Comma delimited list of alternative sequence(s) \\
+    6 & QUAL & Phred-scaled probability of all samples being homozygous reference \\
+    7 & FILTER & Semicolon delimited list of filters that the variant fails to pass \\
+    8 & INFO & Semicolon delimited list of variant information \\
+    9 & FORMAT & Colon delimited list of the format of sample genotypes in subsequent fields \\
+    10+ & & Individual genotype information defined by FORMAT \\
     \bottomrule
     \end{tabular}
   \label{tab:vcfoutput}
@@ -167,7 +165,7 @@ A VCF file has multiple header lines starting with the hash # sign. Below the he
 
 \end{information}
 \begin{steps}
-You can look at the header of the vcf file using grep, ‘-A 1’ includes the first structural variant record in the file:
+You can look at the header of the vcf file using grep, '-A 1' includes the first structural variant record in the file:
 
 \begin{lstlisting}
 grep "^#" -A 1 del.vcf
@@ -265,7 +263,7 @@ Load the IGV browser with hg19 genome specified with the \texttt{-g} option.
 \end{steps}
 
 \begin{information}
-Once IGV has started use ‘File’ and ‘Load from File’ to load the cancer_cell_line.bam. To dedicate more of the screen to read pile ups, right click on the left hand box that contains the ‘cancer_cell_line.bam Junctions’ then select ‘Remove Track’. Go to ‘View’ menu and select ‘Preferences’, then click on the Alignments tab and in the ‘Visibility range threshold (kb)’ text box, enter 600. This will allow you to increase your visibility of pile ups as you zoom out. Now look for check box for ‘Filter secondary alignments’ click on to ensure we do not see secondary alignments (alternate mapped position of a read) . Also ensure that ‘Show soft-clipped bases’ has been checked then click ‘OK’.
+Once IGV has started use ‘File’ and ‘Load from File’ to load the cancer\_cell\_line.bam. To dedicate more of the screen to read pile ups, right click on the left hand box that contains the ‘cancer\_cell\_line.bam Junctions’ then select ‘Remove Track’. Go to ‘View’ menu and select ‘Preferences’, then click on the Alignments tab and in the ‘Visibility range threshold (kb)’ text box, enter 600. This will allow you to increase your visibility of pile ups as you zoom out. Now look for check box for ‘Filter secondary alignments’ click on to ensure we do not see secondary alignments (alternate mapped position of a read) . Also ensure that ‘Show soft-clipped bases’ has been checked then click ‘OK’.
  
 Then import ‘somatic.sv.bed’ from your working directory using ‘Regions’ and ‘Import Regions’. 
 
@@ -358,7 +356,7 @@ Which is the order and orientation of these paired-end reads (FR, RF, FF or RR)?
 \begin{answer}
 RF
 \end{answer}
-What is the estimated read-depth ratio of the cancer_cell_line versus normal control (INFO:RDRATIO) over the duplicate region? 
+What is the estimated read-depth ratio of the cancer\_cell\_line versus normal control (INFO:RDRATIO) over the duplicate region? 
 \begin{answer}
 3.3 (~3 x increased read depth) 
 \end{answer}
