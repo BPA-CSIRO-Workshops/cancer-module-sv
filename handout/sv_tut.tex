@@ -101,10 +101,10 @@ In order to generate ‘putative’ somatic SVs it is crucial to account for ger
 \begin{steps}
 
 \begin{lstlisting}
-delly -t DEL -x $RF/hg19.excl -o del.vcf -g $RF/hg19.fa $DS/cancer_cell_line.bam $DS/control.bam
-delly -t DUP -x $RF/hg19.excl -o dup.vcf -g $RF/hg19.fa $DS/cancer_cell_line.bam $DS/control.bam
-delly -t INV -x $RF/hg19.excl -o inv.vcf -g $RF/hg19.fa $DS/cancer_cell_line.bam $DS/control.bam
-delly -t TRA -x $RF/hg19.excl -o tra.vcf -g $RF/hg19.fa $DS/cancer_cell_line.bam $DS/control.bam
+delly -t DEL -x \$RF/hg19.excl -o del.vcf -g \$RF/hg19.fa \$DS/cancer_cell_line.bam \$DS/control.bam
+delly -t DUP -x \$RF/hg19.excl -o dup.vcf -g \$RF/hg19.fa \$DS/cancer_cell_line.bam \$DS/control.bam
+delly -t INV -x \$RF/hg19.excl -o inv.vcf -g \$RF/hg19.fa \$DS/cancer_cell_line.bam \$DS/control.bam
+delly -t TRA -x \$RF/hg19.excl -o tra.vcf -g \$RF/hg19.fa \$DS/cancer_cell_line.bam \$DS/control.bam
 
 \end{lstlisting}
 
@@ -205,10 +205,10 @@ Please note that this vcf file contains germline and somatic structural variants
 \end{information}
 \begin{steps}
 \begin{lstlisting}
-python $SF/somaticFilter.py -t DEL  -T cancer_cell_line -N control -v del.vcf -o del.filt.vcf -a 0.1 -m 400 -f
-python $SF/somaticFilter.py -t DUP -T cancer_cell_line -N control -v dup.vcf -o dup.filt.vcf -a 0.1 -m 400 -f
-python $SF/somaticFilter.py -t INV  -T cancer_cell_line -N control -v inv.vcf -o inv.filt.vcf -a 0.1 -m 400 -f
-python $SF/somaticFilter.py -t TRA -T cancer_cell_line -N control -v tra.vcf -o tra.filt.vcf -a 0.1 -m 400 -f
+python \$SF/somaticFilter.py -t DEL  -T cancer_cell_line -N control -v del.vcf -o del.filt.vcf -a 0.1 -m 400 -f
+python \$SF/somaticFilter.py -t DUP -T cancer_cell_line -N control -v dup.vcf -o dup.filt.vcf -a 0.1 -m 400 -f
+python \$SF/somaticFilter.py -t INV  -T cancer_cell_line -N control -v inv.vcf -o inv.filt.vcf -a 0.1 -m 400 -f
+python \$SF/somaticFilter.py -t TRA -T cancer_cell_line -N control -v tra.vcf -o tra.filt.vcf -a 0.1 -m 400 -f
 \end{lstlisting}
 \end{steps}
 
@@ -252,7 +252,7 @@ The final step will be to browse some of these somatic structural variants in IG
 \end{information}
 \begin{steps}
 \begin{lstlisting}
-$CZ/dellyVcf2Bed.sh somatic.sv.vcf.gz > somatic.sv.bed
+\$CZ/dellyVcf2Bed.sh somatic.sv.vcf.gz > somatic.sv.bed
 head somatic.sv.bed
 \end{lstlisting}
 \end{steps}
@@ -260,7 +260,7 @@ head somatic.sv.bed
 \begin{steps}
 Load the IGV browser with hg19 genome specified with the \texttt{-g} option.
 \begin{lstlisting}
-$BR/igv.sh -g $RF/hg19.fa
+\$BR/igv.sh -g \$RF/hg19.fa
 \end{lstlisting}
 \end{steps}
 
