@@ -2,6 +2,7 @@
 \setModuleTitle{Structural Variant Analysis}
 \setModuleAuthors{%
   Erdahl Teber \mailto{eteber@cmri.org.au}
+  Ann-Marie Patch \mailto{Ann-Marie.Patch@qimrberghofer.edu.au}
 }
 \setModuleContributions{%
   Mathieu Bourgey \mailto{mathieu.bourgey@mcgill.ca}%
@@ -16,7 +17,7 @@
 \section{Key Learning Outcomes}
 By the end of the structural variant (SV) detection practical course participants will:
 \begin{itemize}
-  \item Have discussed key fundamentals on how paired-end mappings and split-read/soft-clipped read patterns are used in detecting deletions, tandem duplicates, inversions and translocations 
+  \item Have been provided with key fundamentals on how paired-end mappings and split-read/soft-clipped read patterns are used in detecting deletions, tandem duplicates, inversions and translocations. 
   \item Know what important quality control checks need to be evaluated prior to structural variant calling. 
   \item Have run DELLY on a subset of whole genome next generation sequencing data pertaining to a single human tumour with a matched normal control.
   \item Be able to filter high confidence SV predictions. 
@@ -28,10 +29,20 @@ By the end of the structural variant (SV) detection practical course participant
  
 \subsection{Tools Used}
 \begin{description}[style=multiline,labelindent=0cm,align=left,leftmargin=0.5cm]
-  \item[]\hfill\\
-  	\url{}
-  \item[]\hfill\\
-  	\url{}
+  \item[DELLY]\hfill\\
+  	\url{https://github.com/tobiasrausch/delly}
+  \item[Samtools]\hfill\\
+  	\url{http://sourceforge.net/projects/samtools/files/samtools/1.2}
+  \item[Tabix]\hfill\\
+  	\url{http://sourceforge.net/projects/samtools/files/tabix/tabix-0.2.6.tar.bz2}
+  \item[Vcftools]\hfill\\
+  	\url{https://vcftools.github.io/index.html}
+  \item[Picard]\hfill\\
+  	\url{https://github.com/broadinstitute/picard}
+  \item[Python2.7.10]\hfill\\
+  	\url{https://www.python.org/downloads/release/python-2710/}
+  \item[PyVCF Banyan numpy]\hfill\\
+  	\url{https://pypi.python.org/pypi}
 \end{description}
 
 \section{Useful Links}
@@ -82,7 +93,6 @@ mkdir <YourFirstName>
 cd <YourFirstName>
 
 export DS=/home/trainee/sv/data
-export OP=/home/trainee/sv/delly_output
 export RF=/home/trainee/sv/reference_data
 export SF=/home/trainee/sv/variantFiltering/somaticVariants
 export BR=/home/trainee/snv/Applications/igv
@@ -106,21 +116,18 @@ delly -t TRA -x $RF/hg19.excl -o tra.vcf -g $RF/hg19.fa $DS/cancer_cell_line.bam
 
 \end{lstlisting}
 
+
 Description of the arguments used in the command: 
 \begin{description}[style=multiline,labelindent=0cm,align=right,leftmargin=\descriptionlabelspace,rightmargin=1.5cm,font=\ttfamily]
-  \item[DEL] = 
-  \item[DUP] = 
-  \item[INV] = 
-  \item[TRA] = 
-  \item[-o] = 
-  \item[-g] = 
+  \item[DEL] = conduct deletion discovery
+  \item[DUP] = conduct tandem duplication discovery
+  \item[INV] = conduct inversion discovery 
+  \item[TRA] = conduct translocation discovery
+  \item[-o] = vcf output
+  \item[-g] = reference genome in FASTA format
+  \item[-x] = genomic regions to exclude (e.g. centro- and telomeric regions) (https://github.com/tobiasrausch/delly/tree/master/excludeTemplates)
 \end{description}
 
-\begin{warning}
-  \begin{lstlisting}
- %Any pre-computed command can go here
-  \end{lstlisting}
-\end{warning}
 
 \section{DELLY VCF output}
 
@@ -186,7 +193,7 @@ SVs are flagged as FILTER:LowQual if PE\textless3 OR MAPQ\textless20 (for transl
 \section{Somatic Structural Variant Filtering}
 
 \begin{information}
-Please note that this vcf file contains germline and somatic structural variants but also false positives caused by repeat induced mis-mappings or incomplete reference sequences. As a final step we have to use the structural variant site information and the cancer and normal genotype information to filter a set of confident somatic structural variants. DELLY ships with a somatic filtering python script. For a set of confident somatic calls one could exclude all structural variants less than 400bp, require a minimum variant allele frequency of 10%, no support in the matched normal and an overall confident structural variant site prediction with the VCF filter field being equal to PASS.
+Please note that this vcf file contains germline and somatic structural variants but also false positives caused by repeat induced mis-mappings or incomplete reference sequences. As a final step we have to use the structural variant site information and the cancer and normal genotype information to filter a set of confident somatic structural variants. DELLY ships with a somatic filtering python script. For a set of confident somatic calls one could exclude all structural variants \textless400bp, require a minimum variant allele frequency of 10%, no support in the matched normal and an overall confident structural variant site prediction with the VCF filter field being equal to PASS.
 
 \end{information}
 \begin{steps}
@@ -198,17 +205,30 @@ python $SF/somaticFilter.py -t TRA -T cancer_cell_line -N control -v tra.vcf -o 
 \end{lstlisting}
 \end{steps}
 
+-t = type of structural variant (DEL, DUP, INV or TRA)
+-T = the cancer sample label in the VCF file
+-N = the normal control sample name in the VCF file
+-v = input vcf file name containing the structural variants
+-o = output vcf file name to store the filtered structural variants
+-a = minimum variant frequency
+-m = ignore SVs that are < m bp in size
+-f = filter sites for PASS
+
+
 We have used the following arguments for .
 \begin{description}[style=multiline,labelindent=0cm,align=right,leftmargin=\descriptionlabelspace,rightmargin=1.5cm,font=\ttfamily]
-  \item[-t] = 
-  \item[-T] = 
-  \item[-N] = 
-  \item[-v] = 
-  \item[-o] = 
-  \item[-a] = 
-  \item[-m] = the value 400, means ignore SVs that are <400 bp in size and -a 0.1, refers to a minimum variant frequency of 10%. 
+  \item[-t] = type of structural variant (DEL, DUP, INV or TRA) 
+  \item[-T] = the cancer sample label in the VCF file
+  \item[-N] = the normal control sample name in the VCF file
+  \item[-v] = input vcf file name containing the structural variants
+  \item[-o] = output vcf file name to store the filtered structural variants
+  \item[-a] = minimum variant frequency
+  \item[-m] = ignore SVs that are < m bp in size 
 \end{description}
 
+\begin{note}
+The value 400, means ignore SVs that are <400 bp in size and -a 0.1, refers to a minimum variant frequency of 10%. 
+\end{note}
 
 \begin{steps}
 Using VCFtools we can merge all somatic structural variants together in a single vcf file.
@@ -238,15 +258,15 @@ The final step will be to browse some of these somatic structural variants in IG
 \end{information}
 \begin{steps}
 \begin{lstlisting}
-$CZ/dellyVcf2Bed.sh somatic.sv.vcf.gz > somatic.sv.bed
+$CZ/sv.vcf2bed.sh somatic.sv.vcf.gz > somatic.sv.bed
 head somatic.sv.bed
 \end{lstlisting}
 \end{steps}
 
 \begin{steps}
-Load the IGV browser with hg19 genome specified with the \texttt{-g} option.
+Load the IGV browser 
 \begin{lstlisting}
-$BR/igv.sh -g $RF/hg19.fa
+$BR/igv.sh
 \end{lstlisting}
 \end{steps}
 
@@ -257,11 +277,25 @@ Then import \texttt{somatic.sv.bed} from your working directory using \emph{Regi
 
 \end{information}
 
+\subsection{Verify Deletion}
+\begin{advanced}
+
+\begin{steps}
+The somatic structural variants can then be browsed easily using the \emph{Region Navigator}.  Select the deletion (chrX:76853017-77014863) from the \emph{Region Navigator} and click \emph{View}. This will centre the IGV alignment view on the selected structural variant. Close the regions of interest pop up window. The red bar below the ruler marks the region of the deletion.
+
+It’s usually best to zoom out once by clicking on the ‘-‘ sign in the toolbar at the top, to give a wide view of the supporting abnormal paired-end read mappings. 
+
+To highlight the abnormal paired-ends right click on the main track display panel and select \emph{Color alignments by} and then switch to \emph{insert size and pair orientation}.
+
+Read pairs that have a larger than expected insert size will be highlighted in red. Click \emph{View as pairs}. Right click and \emph{Sort alignments by} then select \emph{start location}.
+
+\end{steps}
+\end{advanced}
 
 \begin{questions}
 How many abnormal \emph{paired-end read pairs} (red coloured F/R oriented read pairs) can you see that spans the deletion region? Does this number coincide with the INFO:PE? 
 \begin{answer}
-Zoom into left breakpoint and tally the number of soft-clipped reads at both of this junctions.
+Zoom into left breakpoint and tally the number of soft-clipped reads at both junctions.
 19, YES
 \end{answer}
 
@@ -384,6 +418,6 @@ What is the estimated size of the inverted interval?
 
 \section{Acknowledgements}
 
-I would like to thank and acknowledge Tobias Rausch for his help, and allowing me to borrow and adapt his course material. Also, my thanks to Ann-Marie Patch for the helpful discussions in designing this practical. 
+I would like to thank and acknowledge Tobias Rausch for his help, and allowing me to borrow and adapt his course material. 
 
 
