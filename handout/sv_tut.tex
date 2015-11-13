@@ -155,7 +155,7 @@ A VCF file has multiple header lines starting with the hash \# sign. Below the h
 
 \end{information}
 \begin{steps}
-You can look at the header of the vcf file using grep, '-A 1' includes the first structural variant record in the file:
+You can look at the header of the vcf file using grep, \texttt{-A 1} includes the first structural variant record in the file:
 
 \begin{lstlisting}
 grep "^#" -A 1 del.vcf
@@ -200,30 +200,6 @@ python $SF/somaticFilter.py -t TRA -T cancer_cell_line -N control -v tra.vcf -o 
 \end{lstlisting}
 \end{steps}
 
--t = type of structural variant (DEL, DUP, INV or TRA)
--T = the cancer sample label in the VCF file
--N = the normal control sample name in the VCF file
--v = input vcf file name containing the structural variants
--o = output vcf file name to store the filtered structural variants
--a = minimum variant frequency
--m = ignore SVs that are < m bp in size
--f = filter sites for PASS
-
-
-We have used the following arguments for .
-\begin{description}[style=multiline,labelindent=0cm,align=right,leftmargin=\descriptionlabelspace,rightmargin=1.5cm,font=\ttfamily]
-  \item[-t] = type of structural variant (DEL, DUP, INV or TRA) 
-  \item[-T] = the cancer sample label in the VCF file
-  \item[-N] = the normal control sample name in the VCF file
-  \item[-v] = input vcf file name containing the structural variants
-  \item[-o] = output vcf file name to store the filtered structural variants
-  \item[-a] = minimum variant frequency
-  \item[-m] = ignore SVs that are < m bp in size 
-\end{description}
-
-\begin{note}
-The value 400, means ignore SVs that are <400 bp in size and -a 0.1, refers to a minimum variant frequency of 10%. 
-\end{note}
 
 \begin{steps}
 Using VCFtools we can merge all somatic structural variants together in a single vcf file.
@@ -287,18 +263,18 @@ Read pairs that have a larger than expected insert size will be highlighted in r
 \end{steps}
 \end{advanced}
 
+
 \begin{questions}
 How many abnormal \emph{paired-end read pairs} (red coloured F/R oriented read pairs) can you see that spans the deletion region? Does this number coincide with the INFO:PE? 
 \begin{answer}
-Zoom into left breakpoint and tally the number of soft-clipped reads at both junctions.
 19, YES
 \end{answer}
-
+Zoom into left breakpoint and tally the number of soft-clipped reads at both junctions.
 How many abnormal split-reads (soft-clipped reads) did you observe? Clue INFO:SR.
 \begin{answer}
-Go to the RefSeq genes track at the bottom of IGV and right click to \emph{Expanded}.
 11
 \end{answer}
+Go to the RefSeq genes track at the bottom of IGV and right click to \emph{Expanded}.
 Is the predicted deletion likely to have a deleterious impact on a gene? If so, what gene and exons are deleted?
 \begin{answer}
 ATRX, exons 2 to 25.
@@ -309,8 +285,6 @@ Yes, there is no read coverage within this deletion region relative to the contr
 \end{answer}
 \end{questions}
 
-
-% I thought these can go into the advanced excercise sections
 
 
 \subsection{Verify translocation}
@@ -325,16 +299,15 @@ Zoom out until you can see all the purple reads at the junction.
 \end{steps}
 \end{advanced}
 
-
 \begin{questions}
 What is the direction of the purple cluster of reads (indicates that mate reads are mapped to Chr15)? Is it pointing to the tail or head of Chr18? 
-(HINT: Right click on to one of the purple coloured reads and select \emph{View mate region in split-screen}. This will split the screen and display Chr15 on the left and place a red highlighted outline on both reads, to indicate the pairs. Right click and \emph{Sort alignments by} then select \emph{start location}.)
 \begin{answer}
 Forward, towards the tail, or 3’ (+ive)
 \end{answer}
 \end{questions}
 
 \begin{questions}
+Right click on to one of the purple coloured reads and select \emph{View mate region in split-screen}. This will split the screen and display Chr15 on the left and place a red highlighted outline on both reads, to indicate the pairs. Right click and \emph{Sort alignments by} then select \emph{start location}.
 What is the direction of the yellow cluster of reads (indicates that mate reads are mapped to Chr18)? Is it pointing to the tail or head of Chr15? \newline
 If you wish to zoom in or out, first click inside of the chromosome ideogram panel, then ctrl- to zoom out and shift+ to zoom in. 
 \begin{answer}
@@ -352,7 +325,7 @@ Did DELLY predict a reciprocal translocation? How can you tell?
 \begin{answer}
 No, as we would expect to observe a Chr18 right side fused to Chr15 left side, near the same breakpoints.  
 \end{answer}
-What gene structures is this translocation predicted impact? 
+What gene structures is this translocation predicted to impact? 
 \begin{answer}
 PARD6G on Chr15 and ADAMTSL3 on Chr18.
 \end{answer}
@@ -361,6 +334,8 @@ What is one possible reason why there is no observable read coverage after Chr18
 Chromosome loss.
 \end{answer}
 \end{questions}
+
+
 
 \subsection{Verify tandem duplication}
 \begin{advanced}
@@ -413,6 +388,5 @@ What is the estimated size of the inverted interval?
 
 \section{Acknowledgements}
 
-I would like to thank and acknowledge Tobias Rausch for his help, and allowing me to borrow and adapt his course material. 
-
+We would like to thank and acknowledge Tobias Rausch (EMBL Heidelberg) for his help and for allowing us to borrow and adapt his replies to questions and original course material. 
 
