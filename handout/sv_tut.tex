@@ -111,7 +111,6 @@ delly -t TRA -x $RF/hg19.excl -o tra.vcf -g $RF/hg19.fa $DS/cancer_cell_line.bam
 
 \end{lstlisting}
 
-
 Description of the arguments used in the command: 
 \begin{description}[style=multiline,labelindent=0cm,align=right,leftmargin=\descriptionlabelspace,rightmargin=1.5cm,font=\ttfamily]
   \item[DEL] = conduct deletion discovery
@@ -123,12 +122,10 @@ Description of the arguments used in the command:
   \item[-x] = genomic regions to exclude (e.g. centro- and telomeric regions)
 \end{description}
 
-
 \section{DELLY VCF output}
 
 \begin{information}
 A VCF file has multiple header lines starting with the hash \# sign. Below the header lines is one record for each structural variant. The record format is described in the below table:
-
 
 \begin{table}[H]
   \centering
@@ -179,7 +176,7 @@ grep -c -w "IMPRECISE" *.vcf
 
 
 \begin{information}
-DELLY clusters abnormal paired-ends and every single cluster gives rise to an IMPRECISE SV call. For every IMPRECISE SV call an attempt is made to identify supporting split-reads/soft-clipped reads DELLY then computes a consensus sequence (INFO:CONSENSUS) out of all split-read candidates and then aligns this consensus sequence to the reference requiring at least -m many aligned bases to the left and right (default is 13). INFO:PE is the number of supporting paired-ends. INFO:CT refers connection types (CT), which indicates the order and orientation of paired-end cluster mappings (e.g. 3to3 for 3' to 3' and 5to5 for 5' to 5'). Values can be 3to5, 5to3, 3to3 or 5to5. Different names exist for these connection types in the literature, head-to-head inversions, tail-to-tail inversions, and so on. The consensus alignment quality (SRQ) is a score between 0 and 1, where 1 indicates 100% identity to the reference. Nearby SNPs, InDels and micro-insertions at the breakpoint can lower this score but only for mis-assemblies it should be very poor. DELLY currently drops consensus alignments with a score\textless0.8 and then falls back to an IMPRECISE prediction. 
+DELLY clusters abnormal paired-ends and every single cluster gives rise to an IMPRECISE SV call. For every IMPRECISE SV call an attempt is made to identify supporting split-reads/soft-clipped reads DELLY then computes a consensus sequence (INFO:CONSENSUS) out of all split-read candidates and then aligns this consensus sequence to the reference requiring at least -m many aligned bases to the left and right (default is 13). INFO:PE is the number of supporting paired-ends. INFO:CT refers connection types (CT), which indicates the order and orientation of paired-end cluster mappings (e.g. 3to3 for 3' to 3' and 5to5 for 5' to 5'). Values can be 3to5, 5to3, 3to3 or 5to5. Different names exist for these connection types in the literature, head-to-head inversions, tail-to-tail inversions, and so on. The consensus alignment quality (SRQ) is a score between 0 and 1, where 1 indicates 100\% identity to the reference. Nearby SNPs, InDels and micro-insertions at the breakpoint can lower this score but only for mis-assemblies it should be very poor. DELLY currently drops consensus alignments with a score\textless0.8 and then falls back to an IMPRECISE prediction. 
 
 SVs are flagged as FILTER:LowQual if PE\textless3 OR MAPQ\textless20 (for translocations: PE\textless5 OR MAPQ\textless20), otherwise, the SV results in a FILTER:PASS. PRECISE variants will have split-read support (SR\textgreater0).
 
@@ -188,7 +185,7 @@ SVs are flagged as FILTER:LowQual if PE\textless3 OR MAPQ\textless20 (for transl
 \section{Somatic Structural Variant Filtering}
 
 \begin{information}
-Please note that this vcf file contains germline and somatic structural variants but also false positives caused by repeat induced mis-mappings or incomplete reference sequences. As a final step we have to use the structural variant site information and the cancer and normal genotype information to filter a set of confident somatic structural variants. DELLY ships with a somatic filtering python script. For a set of confident somatic calls one could exclude all structural variants \textless400bp, require a minimum variant allele frequency of 10%, no support in the matched normal and an overall confident structural variant site prediction with the VCF filter field being equal to PASS.
+Please note that this vcf file contains germline and somatic structural variants but also false positives caused by repeat induced mis-mappings or incomplete reference sequences. As a final step we have to use the structural variant site information and the cancer and normal genotype information to filter a set of confident somatic structural variants. DELLY ships with a somatic filtering python script. For a set of confident somatic calls one could exclude all structural variants \textless400bp, require a minimum variant allele frequency of 10\%, no support in the matched normal and an overall confident structural variant site prediction with the VCF filter field being equal to PASS.
 
 \end{information}
 \begin{steps}
