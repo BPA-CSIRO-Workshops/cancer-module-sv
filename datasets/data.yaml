@@ -1,10 +1,10 @@
 btp::modules:
   sv:
-  dirs:
-    - 'sv'
-    - 'sv/data'
-    - 'sv/precomp_output'
-    - 'sv/reference_data'
+    dirs:
+      - 'sv'
+      - 'sv/data'
+      - 'sv/precomp_output'
+      - 'sv/reference_data'
     data:
       cancer_cell_line.bai: 
         source: 'https://s3-ap-southeast-2.amazonaws.com/cancer-data-sv/data'
