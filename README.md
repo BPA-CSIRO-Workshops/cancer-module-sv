@@ -1,38 +1,26 @@
-This repository is a template for developing your own Bioinformatics Training Platform (BTP) workshop module.
-Therefore, if you haven't already, you should head over to the 
-[btp-workshop-template](https://github.com/BPA-CSIRO-Workshops/btp-workshop-template) repository and follow one of the
-[workflows](https://github.com/BPA-CSIRO-Workshops/btp-workshop-template#general-workflows) documented there.
+# cancer-module-sv
+Bioinformatics Training Platform (BTP) Module: Structural Variant Analysis
 
-
-
-Table of Contents
-=================
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-- [Overview](#overview)
-- [General Design/Layout](#general-designlayout)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
-Overview
-========
-The README.md files found in each subdirectory of this repository provide documentation on the structure, function, and usage of the btp-module-template in the context of the BTP framework.
-
-General Design/Layout
-=====================
-These types of workshop modules are designed to be self contained. That is they contain all the
-required information to permit trainers to reuse and repurpose them quickly and easily. They contain
-the following 4 major elements:
-
- * **[Handout](handout)** - This often includes background information, step-by-step exercises, questions and
-   answers as well as bonus exercises for those who progress rapidly.
- * **[Data sets](datasets)** - This describes where to obtain the data sets, used in the handout exercises, and
-   where on the computer system they should be located.
- * **[Tools](tools)** - This describes which tools are used in the handout exercises and how to install them.
- * **[Presentations](presentations)** - This is where you will find presentations for introducing concepts that are
-   explored in the handout exercises.
-
+  * Topic
+    * Structural Variant Analysis
+  * Target Audience
+    * Biologists
+	* Non-bioinformaticians
+	* Little to no programming expereience
+  * Prerequisites
+    * None
+  * Key Learning Outcomes
+    * Have been provided with key fundamentals on how paired-end mappings and split-read/soft-clipped read patterns are used in detecting deletions, tandem duplicates, inversions and translocations. 
+    * Know what important quality control checks need to be evaluated prior to structural variant calling. 
+    * Have run DELLY on a subset of whole genome next generation sequencing data pertaining to a single human tumour with a matched normal control.
+    * Be able to filter high confidence SV predictions. 
+    * Have gained basic knowledge to interpret the VCF output provided by DELLY.
+    * Have used their understanding of distinct SV paired-end mapping and soft-clipped read patterns to visually verify DELLY predicted SVs using IGV.
+  * Time Required
+    * 
+  * Compute Requirements
+    * 
+	
 License
 =======
 The contents of this repository are released under the Creative Commons
