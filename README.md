@@ -18,9 +18,7 @@ Bioinformatics Training Platform (BTP) Module: Structural Variant Analysis
     * Have used their understanding of distinct SV paired-end mapping and soft-clipped read patterns to visually verify DELLY predicted SVs using IGV.
   * Time Required
     * 
-  * Compute Requirements
-    * 
-	
+
 License
 =======
 The contents of this repository are released under the Creative Commons
