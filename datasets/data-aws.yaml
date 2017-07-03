@@ -1,0 +1,84 @@
+btp::modules:
+  sv:
+    dirs:
+      - 'sv'
+      - 'sv/data'
+      - 'sv/precomp_output'
+      - 'sv/reference_data'
+    data:
+      cancer_cell_line.bai: 
+        source: 'https://s3-ap-southeast-2.amazonaws.com/cancer-data-sv/data'
+        targets: 
+          - 'sv/data/cancer_cell_line.bai'
+      cancer_cell_line.bam: 
+        source: 'https://s3-ap-southeast-2.amazonaws.com/cancer-data-sv/data'
+        targets: 
+          - 'sv/data/cancer_cell_line.bam'
+      control.bai: 
+        source: 'https://s3-ap-southeast-2.amazonaws.com/cancer-data-sv/data'
+        targets: 
+          - 'sv/data/control.bai'
+      control.bam: 
+        source: 'https://s3-ap-southeast-2.amazonaws.com/cancer-data-sv/data'
+        targets: 
+          - 'sv/data/control.bam'
+      del.filtered.vcf: 
+        source: 'https://s3-ap-southeast-2.amazonaws.com/cancer-data-sv/precomp_output'
+        targets: 
+          - 'sv/precomp_output/del.filtered.vcf'
+      del.vcf: 
+        source: 'https://s3-ap-southeast-2.amazonaws.com/cancer-data-sv/precomp_output'
+        targets: 
+          - 'sv/precomp_output/del.vcf'
+      dup.filtered.vcf: 
+        source: 'https://s3-ap-southeast-2.amazonaws.com/cancer-data-sv/precomp_output'
+        targets: 
+          - 'sv/precomp_output/dup.filtered.vcf'
+      dup.vcf: 
+        source: 'https://s3-ap-southeast-2.amazonaws.com/cancer-data-sv/precomp_output'
+        targets: 
+          - 'sv/precomp_output/dup.vcf'
+      inv.filtered.vcf: 
+        source: 'https://s3-ap-southeast-2.amazonaws.com/cancer-data-sv/precomp_output'
+        targets: 
+          - 'sv/precomp_output/inv.filtered.vcf'
+      inv.vcf: 
+        source: 'https://s3-ap-southeast-2.amazonaws.com/cancer-data-sv/precomp_output'
+        targets: 
+          - 'sv/precomp_output/inv.vcf'
+      somatic.SV.bed: 
+        source: 'https://s3-ap-southeast-2.amazonaws.com/cancer-data-sv/precomp_output'
+        targets: 
+          - 'sv/precomp_output/somatic.SV.bed'
+      somatic.SV.vcf: 
+        source: 'https://s3-ap-southeast-2.amazonaws.com/cancer-data-sv/precomp_output'
+        targets: 
+          - 'sv/precomp_output/somatic.SV.vcf'
+      somatic.SV.vcf.gz: 
+        source: 'https://s3-ap-southeast-2.amazonaws.com/cancer-data-sv/precomp_output'
+        targets: 
+          - 'sv/precomp_output/somatic.SV.vcf.gz'
+      somatic.SV.vcf.gz.tbi: 
+        source: 'https://s3-ap-southeast-2.amazonaws.com/cancer-data-sv/precomp_output'
+        targets: 
+          - 'sv/precomp_output/somatic.SV.vcf.gz.tbi'
+      tra.filtered.vcf: 
+        source: 'https://s3-ap-southeast-2.amazonaws.com/cancer-data-sv/precomp_output'
+        targets: 
+          - 'sv/precomp_output/tra.filtered.vcf'
+      tra.vcf: 
+        source: 'https://s3-ap-southeast-2.amazonaws.com/cancer-data-sv/precomp_output'
+        targets: 
+          - 'sv/precomp_output/tra.vcf'
+      hg19.excl: 
+        source: 'https://s3-ap-southeast-2.amazonaws.com/cancer-data-sv/reference_data'
+        targets: 
+          - 'sv/reference_data/hg19.excl'
+      hg19.fa: 
+        source: 'https://s3-ap-southeast-2.amazonaws.com/cancer-data-sv/reference_data'
+        targets: 
+          - 'sv/reference_data/hg19.fa'
+      hg19.fa.fai: 
+        source: 'https://s3-ap-southeast-2.amazonaws.com/cancer-data-sv/reference_data'
+        targets: 
+          - 'sv/reference_data/hg19.fa.fai'
