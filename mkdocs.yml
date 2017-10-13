@@ -3,7 +3,7 @@ site_description: This contains all material for the Structural Variant Analysis
 site_author: Authors
 docs_dir: handout
 
-#site_url: 'https://github.com/BPA-CSIRO-Workshops/cancer-module-snv'
+#site_url: 'https://github.com/BPA-CSIRO-Workshops/cancer-module-sv'
 
 copyright: '&copy; The authors; 2017-'
 
