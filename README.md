@@ -1,4 +1,4 @@
-# cancer-module-sv
+# Structural Variant Analysis
 Bioinformatics Training Platform (BTP) Module: Structural Variant Analysis
 
   * Topic
